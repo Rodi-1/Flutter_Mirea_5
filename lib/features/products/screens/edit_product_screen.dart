@@ -1,30 +1,37 @@
 import 'package:flutter/material.dart';
+import '../models/product.dart';
 
-class AddProductScreen extends StatefulWidget {
+class EditProductScreen extends StatefulWidget {
+  final Product initial;
   final VoidCallback onCancel;
-  final void Function({
-    required String name,
-    required String sku,
-    required int qty,
-    required String location,
-  }) onSave;
+  final void Function(String name, String sku, int qty, String location) onSave;
 
-  const AddProductScreen({
+  const EditProductScreen({
     super.key,
+    required this.initial,
     required this.onCancel,
     required this.onSave,
   });
 
   @override
-  State<AddProductScreen> createState() => _AddProductScreenState();
+  State<EditProductScreen> createState() => _EditProductScreenState();
 }
 
-class _AddProductScreenState extends State<AddProductScreen> {
+class _EditProductScreenState extends State<EditProductScreen> {
   final _formKey = GlobalKey<FormState>();
-  final _name = TextEditingController();
-  final _sku = TextEditingController();
-  final _qty = TextEditingController(text: '0');
-  final _loc = TextEditingController();
+  late final TextEditingController _name;
+  late final TextEditingController _sku;
+  late final TextEditingController _qty;
+  late final TextEditingController _loc;
+
+  @override
+  void initState() {
+    super.initState();
+    _name = TextEditingController(text: widget.initial.name);
+    _sku  = TextEditingController(text: widget.initial.sku);
+    _qty  = TextEditingController(text: widget.initial.qty.toString());
+    _loc  = TextEditingController(text: widget.initial.location);
+  }
 
   @override
   void dispose() {
@@ -40,12 +47,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
   void _submit() {
     if (!(_formKey.currentState?.validate() ?? false)) return;
     final qtyParsed = int.tryParse(_qty.text.trim()) ?? 0;
-    widget.onSave(
-      name: _name.text.trim(),
-      sku: _sku.text.trim(),
-      qty: qtyParsed,
-      location: _loc.text.trim(),
-    );
+    widget.onSave(_name.text.trim(), _sku.text.trim(), qtyParsed, _loc.text.trim());
   }
 
   @override
@@ -56,7 +58,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
         key: _formKey,
         child: ListView(
           children: [
-            Text('Карточка товара', style: Theme.of(context).textTheme.titleLarge),
+            Text('Редактирование товара', style: Theme.of(context).textTheme.titleLarge),
             const SizedBox(height: 12),
             TextFormField(
               controller: _name,
