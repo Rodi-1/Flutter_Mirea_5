@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import '../widgets/pie_capacity.dart';
 
-/// Домашний экран: диаграмма "занято/вместимость" + кнопки навигации
 class HomeScreen extends StatelessWidget {
   final int capacity;
-  final int usedPlaces; // количество позиций (items.length)
+  final int usedPlaces;
   final VoidCallback onOpenList;
   final VoidCallback onOpenAdd;
 

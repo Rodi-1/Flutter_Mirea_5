@@ -18,7 +18,7 @@ class Product {
 
   static int _auto = 0;
 
-  /// Гарантированно уникальный id без внешних пакетов.
+
   static String newId() {
     final t = DateTime.now().microsecondsSinceEpoch;
     return 'p_${t}_${_auto++}';

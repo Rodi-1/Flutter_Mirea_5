@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-/// Простой "бублик" занятости склада без внешних пакетов.
-/// Показывает долю использованных мест от capacity.
+
 class PieCapacity extends StatelessWidget {
   final int used;
   final int capacity;
