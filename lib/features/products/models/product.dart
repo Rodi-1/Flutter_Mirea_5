@@ -16,8 +16,13 @@ class Product {
     required this.createdAt,
   });
 
-  /// Простой генератор id без внешних пакетов (под учебный проект)
-  static String newId() => DateTime.now().microsecondsSinceEpoch.toString();
+  static int _auto = 0;
+
+  /// Гарантированно уникальный id без внешних пакетов.
+  static String newId() {
+    final t = DateTime.now().microsecondsSinceEpoch;
+    return 'p_${t}_${_auto++}';
+  }
 
   Product copyWith({
     String? id,

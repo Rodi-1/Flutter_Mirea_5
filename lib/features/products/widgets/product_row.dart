@@ -19,7 +19,6 @@ class ProductRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      key: ValueKey(product.id), // важно для корректного удаления из середины
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.secondaryContainer,

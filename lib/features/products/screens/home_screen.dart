@@ -7,7 +7,6 @@ class HomeScreen extends StatelessWidget {
   final int usedPlaces; // количество позиций (items.length)
   final VoidCallback onOpenList;
   final VoidCallback onOpenAdd;
-  final ValueChanged<int> onChangeCapacity;
 
   const HomeScreen({
     super.key,
@@ -15,7 +14,6 @@ class HomeScreen extends StatelessWidget {
     required this.usedPlaces,
     required this.onOpenList,
     required this.onOpenAdd,
-    required this.onChangeCapacity,
   });
 
   @override
@@ -81,28 +79,6 @@ class HomeScreen extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 16),
-          Text('Параметры', style: Theme.of(context).textTheme.titleSmall),
-          const SizedBox(height: 8),
-          Row(
-            children: [
-              const Text('Вместимость склада:'),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Slider(
-                  value: capacity.toDouble(),
-                  min: 0,
-                  max: 200,
-                  divisions: 200,
-                  label: '$capacity',
-                  onChanged: (v) => onChangeCapacity(v.toInt()),
-                ),
-              ),
-              SizedBox(
-                width: 72,
-                child: Text('$capacity', textAlign: TextAlign.end),
-              ),
-            ],
-          ),
         ],
       ),
     );

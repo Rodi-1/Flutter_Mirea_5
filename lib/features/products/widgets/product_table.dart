@@ -28,6 +28,7 @@ class ProductTable extends StatelessWidget {
       itemBuilder: (context, index) {
         final p = items[index];
         return ProductRow(
+          key: ValueKey(p.id), 
           product: p,
           onDelete: onDelete,
           onAdjustQty: onAdjustQty,

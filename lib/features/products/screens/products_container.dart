@@ -5,6 +5,9 @@ import 'product_list_screen.dart';
 import 'add_product_screen.dart';
 import 'edit_product_screen.dart';
 
+
+const int kWarehouseCapacity = 50;
+
 enum _Screen { home, list, add, edit }
 
 /// Контейнер-фича: хранит состояние, управляет навигацией между экранами.
@@ -19,9 +22,6 @@ class _ProductsContainerState extends State<ProductsContainer> {
   _Screen _screen = _Screen.home;
   String? _editingId;
 
-  /// "Вместимость склада": максимальное количество позиций (мест).
-  /// При желании поменяй на нужное число или вынеси в настройки.
-  int _capacity = 50;
 
   final List<Product> _items = [
     Product(
@@ -130,11 +130,10 @@ class _ProductsContainerState extends State<ProductsContainer> {
       case _Screen.home:
         title = 'Склад — домашний экран';
         body = HomeScreen(
-          capacity: _capacity,
+          capacity: kWarehouseCapacity,
           usedPlaces: _items.length,
           onOpenList: _showList,
           onOpenAdd: _showAdd,
-          onChangeCapacity: (v) => setState(() => _capacity = v.clamp(0, 100000)),
         );
         break;
       case _Screen.list:
